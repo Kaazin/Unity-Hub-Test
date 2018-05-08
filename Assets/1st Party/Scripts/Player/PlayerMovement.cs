@@ -7,28 +7,33 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed;
     public Vector3 dir;
-    public Camera cam;
+    Vector3 myDirection;
+    Camera cam;
+    // Use this for initialization
+    void Awake()
+    {
+        cam = Camera.main;
+    }
 
-	// Use this for initialization
-	void Awake ()
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
+        myDirection = cam.transform.forward;
+        myDirection.y = 0;
+        transform.rotation *= Quaternion.Euler(0, cam.transform.rotation.y, 0);
+
         float moveV = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float moveH = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 
+        dir = new Vector3(moveH,0,moveV) * speed * Time.deltaTime;
+
         if (moveH != 0 || moveV != 0)
         {
-           // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z)), 1);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 1);
         }
 
-        dir = new Vector3(moveH, 0, moveV) * speed * Time.deltaTime;
-        transform.Translate(transform.rotation * new Vector3(-dir.x,dir.y,dir.z));
+        transform.Translate(dir);
     }
 
-  
+
 }

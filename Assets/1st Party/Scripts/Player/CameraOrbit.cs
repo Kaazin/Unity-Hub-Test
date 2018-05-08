@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraOrbit : MonoBehaviour
 {
 
-    Transform target;
+    /*Transform target;
 
     public float moveH = 45;
     public float moveV = 15;
@@ -63,4 +63,6 @@ public class CameraOrbit : MonoBehaviour
    
 
     }
+    */
+
 }
