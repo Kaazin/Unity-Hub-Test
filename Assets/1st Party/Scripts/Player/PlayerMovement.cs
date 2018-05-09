@@ -20,19 +20,13 @@ public class PlayerMovement : MonoBehaviour
     {
         myDirection = cam.transform.forward;
         myDirection.y = 0;
-        transform.rotation *= Quaternion.Euler(0, cam.transform.rotation.y, 0);
 
         float moveV = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float moveH = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 
         dir = new Vector3(moveH,0,moveV) * speed * Time.deltaTime;
-
-        if (moveH != 0 || moveV != 0)
-        {
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 1);
-        }
-
-        transform.Translate(dir);
+        Vector3 moveDir = Vector3.Scale(myDirection, dir);
+       transform.Translate(moveDir);
     }
 
 
